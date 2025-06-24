@@ -1,0 +1,24 @@
+ClearCollect(
+    colPowerBI,
+    ForAll(
+        PowerBI.ExecuteDatasetQuery(
+            "d8fa06d7-fd21-42b7-8aa8-40313fb48886",
+            "265d9744-6434-4d6a-87b3-8fedd507c91d",
+            "/* START QUERY BUILDER */
+EVALUATE
+SUMMARIZECOLUMNS(
+    DIM_ORG_LEVEL_3[BTT_SERVICE_PROVIDER_VALUE],
+    KEEPFILTERS( TREATAS( {2025,2026}, DIM_ORG_LEVEL_3[BFY] ))
+)
+ORDER BY 
+    DIM_ORG_LEVEL_3[BTT_SERVICE_PROVIDER_VALUE] ASC
+/* END QUERY BUILDER */"
+        ).firstTableRows As ROW,
+        {
+            ServiceProvider: AsType(
+                ROW.Value.'DIM_ORG_LEVEL_3[BTT_SERVICE_PROVIDER_VALUE]',
+                Text
+            )
+        }
+    )
+)
