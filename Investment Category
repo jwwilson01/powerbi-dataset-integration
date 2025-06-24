@@ -1,0 +1,24 @@
+ClearCollect(
+    colPowerBI,
+    ForAll(
+        PowerBI.ExecuteDatasetQuery(
+            "2688c5ea-5977-432e-a9e7-1b8d9dfe775f",
+            "292c2f44-c32c-4d73-ac62-3fc3c47de9f9",
+            "/* START QUERY BUILDER */
+EVALUATE
+SUMMARIZECOLUMNS(
+    DIM_INVESTMENT_CATEGORY[BTT_INVESTMENT_CATEGORY_VALUE],
+    KEEPFILTERS( TREATAS( {2026}, DIM_INVESTMENT_CATEGORY[BFY] ))
+)
+ORDER BY 
+    DIM_INVESTMENT_CATEGORY[BTT_INVESTMENT_CATEGORY_VALUE] ASC
+/* END QUERY BUILDER */"
+        ).firstTableRows As ROW,
+        {
+            ServiceProvider: AsType(
+                ROW.Value.'DIM_ORG_LEVEL_3[BTT_SERVICE_PROVIDER_VALUE]',
+                Text
+            )
+        }
+    )
+)
