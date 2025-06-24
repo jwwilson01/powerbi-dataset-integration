@@ -15,8 +15,8 @@ ORDER BY
 /* END QUERY BUILDER */"
         ).firstTableRows As ROW,
         {
-            ServiceProvider: AsType(
-                ROW.Value.'DIM_ORG_LEVEL_3[BTT_SERVICE_PROVIDER_VALUE]',
+            InvestmentCategory: AsType(
+                ROW.Value.'DIM_INVESTMENT_CATEGORY[BTT_INVESTMENT_CATEGORY_VALUE]',
                 Text
             )
         }
